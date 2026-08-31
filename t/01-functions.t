@@ -5,9 +5,17 @@ use warnings;
 use Test::More;
 use Test::Exception;
 
-use_ok 'MIDI::RtMidi::Util';
+BEGIN {
+    use_ok 'MIDI::RtMidi::Util', qw(out_port halt);
+}
 
-lives_ok { MIDI::RtMidi::Util::foo(666) }
-    'lives through foo()';
+subtest throws => sub {
+    throws_ok { out_port() }
+        qr/Too few arguments/,
+        'out_port() dies without port name';
+    throws_ok { halt() }
+        qr/Too few arguments/,
+        'halt() dies without port';
+};
 
 done_testing();
