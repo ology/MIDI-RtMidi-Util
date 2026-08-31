@@ -15,7 +15,7 @@ subtest throws => sub {
         'out_port() dies without port name';
     throws_ok { halt() }
         qr/Too few arguments/,
-        'halt() dies without port';
+        'halt() dies without a port';
 };
 
 done_testing();
