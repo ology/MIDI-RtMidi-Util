@@ -1,4 +1,6 @@
 Revision history for MIDI-RtMidi-Util
 
 {{$NEXT}}
+
+0.0100 2026-08-31 16:51:23
     - Mint with Dist::Zilla.
