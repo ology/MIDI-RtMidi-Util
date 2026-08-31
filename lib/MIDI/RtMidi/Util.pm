@@ -4,35 +4,41 @@ package MIDI::RtMidi::Util;
 
 our $VERSION = '0.0100';
 
-use strict;
-use warnings;
+use v5.36;
+
+use MIDI::RtMidi::FFI::Device ();
 
 =head1 SYNOPSIS
 
-  use MIDI::RtMidi::Util ();
+  use MIDI::RtMidi::Util qw(out_port);
 
-  $foo = MIDI::RtMidi::Util::foo();
+  my $out_port = out_port('usb');
 
 =head1 DESCRIPTION
 
-C<MIDI::RtMidi::Util> is a container for Real-time MIDI utilities.
+C<MIDI::RtMidi::Util> is a junk drawer for Real-time MIDI utilities.
 
 =cut
 
 =head1 FUNCTIONS
 
-=head2 foo
+=head2 out_port
 
-  $foo = MIDI::RtMidi::Util::foo();
+  $out_port = out_port($name);
 
-Foo!
+Open and return a L<MIDI::RtMidi::FFI::Device> C<RtMidiOut> device.
 
 =cut
 
-sub foo {
-    my (%args) = @_;
-    my $foo ||= 'bar';
-    return $foo;
+sub out_port ($name) {
+    my $midi_out = RtMidiOut->new;
+    try { $midi_out->open_virtual_port('RtMidiOut') } # needed for mac
+    catch ($e) {
+        # warn 'Not a Mac';
+    }
+    try { $midi_out->open_port_by_name(qr/\Q$name/i) }
+    catch ($e) { die "Can't open MIDI port: $name\n" }
+    return $midi_out;
 }
 
 1;
@@ -40,6 +46,6 @@ __END__
 
 =head1 SEE ALSO
 
-L<Another::Module>
+L<MIDI::RtMidi::FFI::Device>
 
 =cut
