@@ -1,0 +1,4 @@
+Revision history for MIDI-RtMidi-Util
+
+{{$NEXT}}
+    - Mint with Dist::Zilla.
