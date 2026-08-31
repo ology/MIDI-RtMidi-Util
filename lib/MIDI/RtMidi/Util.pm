@@ -2,7 +2,7 @@ package MIDI::RtMidi::Util;
 
 # ABSTRACT: Handy Utilities for Real-time MIDI
 
-our $VERSION = '0.0100';
+our $VERSION = '0.0101';
 
 use v5.36;
 use feature 'try';
@@ -19,9 +19,11 @@ no warnings 'experimental::try';
 
 =head1 SYNOPSIS
 
-  use MIDI::RtMidi::Util qw(out_port);
+  use MIDI::RtMidi::Util qw(out_port halt);
 
-  my $out_port = out_port('usb');
+  my $midi_out = out_port('usb');
+  # do something cool ...
+  halt($midi_out);
 
 =head1 DESCRIPTION
 
