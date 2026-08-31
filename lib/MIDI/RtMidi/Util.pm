@@ -7,7 +7,7 @@ our $VERSION = '0.0100';
 use v5.36;
 use feature 'try';
 
-use Data::Dumper::Compact qw(ddc);
+# use Data::Dumper::Compact qw(ddc);
 use MIDI::RtMidi::FFI::Device ();
 use Exporter 'import';
 our @EXPORT = qw(
