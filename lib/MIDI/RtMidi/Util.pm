@@ -43,7 +43,6 @@ Open and return a L<MIDI::RtMidi::FFI::Device> C<RtMidiOut> device.
 
 sub out_port ($name) {
     my $midi_out = RtMidiOut->new;
-    say ddc $midi_out;
     try { $midi_out->open_virtual_port('RtMidiOut') } # needed for mac
     catch ($e) {
         # warn 'Not a Mac';
