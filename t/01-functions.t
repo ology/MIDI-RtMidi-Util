@@ -11,9 +11,9 @@ subtest throws => sub {
     throws_ok { out_port() }
         qr/Too few arguments/,
         'out_port() dies without port name';
-    throws_ok { halt() }
+    throws_ok { stop_device() }
         qr/Too few arguments/,
-        'halt() dies without a port';
+        'stop_device() dies without a port';
 };
 
 subtest defaults => sub {

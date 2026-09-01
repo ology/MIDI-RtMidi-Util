@@ -12,7 +12,7 @@ use MIDI::RtMidi::FFI::Device ();
 use Exporter 'import';
 our @EXPORT = qw(
     out_port
-    halt
+    stop_device
     input_ports
     output_ports
 );
@@ -21,7 +21,7 @@ no warnings 'experimental::try';
 
 =head1 SYNOPSIS
 
-  use MIDI::RtMidi::Util qw(out_port halt input_ports output_ports);
+  use MIDI::RtMidi::Util qw(out_port stop_device input_ports output_ports);
 
   my $ports = input_ports(); # e.g. ['USB MIDI Interface', ...]
   $ports = output_ports();
@@ -29,13 +29,13 @@ no warnings 'experimental::try';
   my $midi_out = out_port('usb');
 
   END {
-    halt($midi_out);
+    stop_device($midi_out);
   }
 
   # redefine what happens on ^C:
   $SIG{INT} = sub {
     print "\nStop sequencer\n";
-    halt($midi_out);
+    stop_device($midi_out);
   };
 
 =head1 DESCRIPTION
@@ -67,21 +67,21 @@ sub out_port ($name) {
     return $midi_out;
 }
 
-=head2 halt
+=head2 stop_device
 
-  halt();
+  stop_device();
 
 Stop and close an open C<RtMidiOut> device.
 
 =cut
 
-sub halt ($midi_out) {
+sub stop_device ($midi_out) {
     try {
         $midi_out->stop;
         $midi_out->panic;
     }
     catch ($e) {
-        warn "Can't halt the MIDI out devices: $e\n";
+        warn "Can't stop the MIDI out device: $e\n";
     }
 }
 

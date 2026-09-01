@@ -1,6 +1,7 @@
 Revision history for MIDI-RtMidi-Util
 
 {{$NEXT}}
+    Rename the `halt()` function to `stop_device()`.
 
 0.0201 2026-08-31 21:22:15
     - Improve documentation again.
