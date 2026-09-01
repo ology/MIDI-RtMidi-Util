@@ -2,7 +2,7 @@ package MIDI::RtMidi::Util;
 
 # ABSTRACT: Handy Utilities for Real-time MIDI
 
-our $VERSION = '0.0101';
+our $VERSION = '0.0102';
 
 use v5.36;
 use feature 'try';
@@ -68,7 +68,6 @@ sub halt ($midi_out) {
     catch ($e) {
         warn "Can't halt the MIDI out devices: $e\n";
     }
-    exit;
 }
 
 1;
