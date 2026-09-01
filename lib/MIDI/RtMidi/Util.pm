@@ -34,7 +34,7 @@ no warnings 'experimental::try';
   }
   # or redefine what happens on ^C:
   $SIG{INT} = sub {
-    say "\nStop";
+    print "\nStop\n";
     halt($midi_out);
     _exit(0);
   };
