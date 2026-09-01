@@ -25,10 +25,10 @@ no warnings 'experimental::try';
 
   my $ports = input_ports(); # e.g. ['USB MIDI Interface', ...]
   $ports = output_ports();
-  
+
   my $midi_out = out_port('usb');
   # Do something cool ...
-  
+
   END {
     stop_device($midi_out);
   }
