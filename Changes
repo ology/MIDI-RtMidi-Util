@@ -1,6 +1,7 @@
 Revision history for MIDI-RtMidi-Util
 
 {{$NEXT}}
+    Add the `input_ports` and `output_ports()` functions.
 
 0.0102 2026-08-31 17:15:05
     - Don't `exit;` in the `halt()` routine.
