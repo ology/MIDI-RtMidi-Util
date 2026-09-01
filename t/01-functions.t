@@ -4,7 +4,7 @@ use Test::More;
 use Test::Exception;
 
 BEGIN {
-    use_ok 'MIDI::RtMidi::Util', qw(out_port halt input_ports output_ports);
+    use_ok 'MIDI::RtMidi::Util', qw(out_port stop_device input_ports output_ports);
 }
 
 subtest throws => sub {
