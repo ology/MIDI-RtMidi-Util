@@ -25,18 +25,13 @@ no warnings 'experimental::try';
 
   my $ports = input_ports(); # e.g. ['USB MIDI Interface', ...]
   $ports = output_ports();
-
+  
   my $midi_out = out_port('usb');
-
+  # Do something cool ...
+  
   END {
     stop_device($midi_out);
   }
-
-  # redefine what happens on ^C:
-  $SIG{INT} = sub {
-    print "\nStop sequencer\n";
-    stop_device($midi_out);
-  };
 
 =head1 DESCRIPTION
 
@@ -71,7 +66,7 @@ sub out_port ($name) {
 
   stop_device();
 
-Stop and close an open C<RtMidiOut> device.
+Stop and close an open C<MIDI::RtMidi::FFI::Device> device.
 
 =cut
 
@@ -81,7 +76,7 @@ sub stop_device ($midi_out) {
         $midi_out->panic;
     }
     catch ($e) {
-        warn "Can't stop the MIDI out device: $e\n";
+        warn "Can't stop the MIDI device: $e\n";
     }
 }
 
