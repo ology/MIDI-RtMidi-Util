@@ -2,7 +2,7 @@ package MIDI::RtMidi::Util;
 
 # ABSTRACT: Handy Utilities for Real-time MIDI
 
-our $VERSION = '0.0200';
+our $VERSION = '0.0201';
 
 use v5.36;
 use feature 'try';
@@ -22,7 +22,6 @@ no warnings 'experimental::try';
 =head1 SYNOPSIS
 
   use MIDI::RtMidi::Util qw(out_port halt input_ports output_ports);
-  use POSIX qw(_exit); # skips global destruction
 
   my $ports = input_ports(); # e.g. ['USB MIDI Interface', ...]
   $ports = output_ports();
@@ -32,11 +31,11 @@ no warnings 'experimental::try';
   END {
     halt($midi_out);
   }
-  # or redefine what happens on ^C:
+
+  # redefine what happens on ^C:
   $SIG{INT} = sub {
-    print "\nStop\n";
+    print "\nStop sequencer\n";
     halt($midi_out);
-    _exit(0);
   };
 
 =head1 DESCRIPTION

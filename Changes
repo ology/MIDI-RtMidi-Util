@@ -1,6 +1,7 @@
 Revision history for MIDI-RtMidi-Util
 
 {{$NEXT}}
+    - Improve documentation again.
 
 0.0200 2026-08-31 19:37:21
     Add the `input_ports()` and `output_ports()` functions.
