@@ -11,6 +11,7 @@ use feature 'try';
 use MIDI::RtMidi::FFI::Device ();
 use Exporter 'import';
 our @EXPORT = qw(
+    in_port
     out_port
     stop_device
     input_ports
@@ -26,6 +27,7 @@ no warnings 'experimental::try';
   my $ports = input_ports(); # e.g. ['USB MIDI Interface', ...]
   $ports = output_ports();
 
+  my $midi_in  = in_port('keyboard');
   my $midi_out = out_port('usb');
   # Do something cool ...
 
@@ -40,6 +42,23 @@ C<MIDI::RtMidi::Util> is a junk drawer for Real-time MIDI utilities.
 =cut
 
 =head1 FUNCTIONS
+
+=head2 in_port
+
+  $in_port = in_port($name);
+
+Open and return a named L<MIDI::RtMidi::FFI::Device> C<RtMidiIn> device.
+
+This function takes a unique part of an open port name as its argument.
+
+=cut
+
+sub in_port ($name) {
+    my $midi_in = RtMidiIn->new;
+    try { $midi_in->open_port_by_name(qr/\Q$name/i) }
+    catch ($e) { die "Can't open MIDI port: $name\n" }
+    return $midi_in;
+}
 
 =head2 out_port
 
