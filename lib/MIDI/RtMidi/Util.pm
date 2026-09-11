@@ -2,7 +2,7 @@ package MIDI::RtMidi::Util;
 
 # ABSTRACT: Handy Utilities for Real-time MIDI
 
-our $VERSION = '0.0400';
+our $VERSION = '0.0401';
 
 use v5.36;
 use feature 'try';
