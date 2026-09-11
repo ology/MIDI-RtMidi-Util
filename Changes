@@ -1,6 +1,7 @@
 Revision history for MIDI-RtMidi-Util
 
 {{$NEXT}}
+    - Add the handy `stop_all_notes()` function.
 
 0.0400 2026-09-07 14:59:30
     - Add the missing `in_port()` function.
