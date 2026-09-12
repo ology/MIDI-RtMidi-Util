@@ -9,8 +9,8 @@ use IO::Async::Timer::Periodic ();
 use MIDI::RtMidi::FFI::Device ();
 use MIDI::RtMidi::Util qw(out_port stop_device stop_all_notes);
 
-my $port = shift || 'usb';
 my $bpm  = shift || 60;
+my $port = shift || 'usb';
 
 my $divisions_beat  = 4;
 my $clocks_per_beat = 6 * $divisions_beat; # PPQN
