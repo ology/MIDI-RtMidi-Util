@@ -17,7 +17,6 @@ my $clocks_per_beat = 6 * $divisions_beat; # PPQN
 my $clock_interval  = 60 / $bpm / $clocks_per_beat;
 
 my $midi_out = out_port($port);
-# $midi_out->program_change(0, 0);
 $midi_out->start;
 
 $SIG{INT} = sub {
