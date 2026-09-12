@@ -1,12 +1,12 @@
 #!/usr/bin/env perl
 
-# Illustrate usage of MIDI::RtMidi::Util functions that open and
-# start an available system midi port.
+# Open and start an available system midi port.
 
 use v5.36;
 use Data::Dumper::Compact qw(ddc);
 use IO::Async::Loop ();
 use IO::Async::Timer::Periodic ();
+use MIDI::RtMidi::FFI::Device ();
 use MIDI::RtMidi::Util qw(out_port stop_device stop_all_notes);
 
 my $port = shift || 'usb';
