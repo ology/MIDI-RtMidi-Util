@@ -101,6 +101,22 @@ sub stop_device ($midi_out) {
     }
 }
 
+=head2 stop_all_notes
+
+  stop_all_notes();
+
+Send a C<note_off()> message to all channels and all notes.
+
+=cut
+
+sub stop_all_notes ($midi_out) {
+    for my $chan (0, 15) {
+        for my $n (0 .. 127) {
+            $midi_out->note_off($chan, $n, 0);
+        }
+    }
+}
+
 =head2 input_ports
 
   $input_ports = input_ports();
@@ -131,22 +147,6 @@ sub output_ports () {
         map { $device->get_port_name($_) }
             sort { $a <=> $b } keys $device->get_all_port_nums->%*
     ];
-}
-
-=head2 stop_all_notes
-
-  stop_all_notes();
-
-Send a C<note_off()> message to all channels and all notes.
-
-=cut
-
-sub stop_all_notes ($midi_out) {
-    for my $chan (0, 15) {
-        for my $n (0 .. 127) {
-            $midi_out->note_off($chan, $n, 0);
-        }
-    }
 }
 
 1;
