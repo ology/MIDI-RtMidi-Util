@@ -87,7 +87,7 @@ sub out_port ($name) {
 
   stop_device();
 
-Stop and close an open C<MIDI::RtMidi::FFI::Device> device.
+Stop an open C<MIDI::RtMidi::FFI::Device> device.
 
 =cut
 
