@@ -4,12 +4,11 @@ package MIDI::RtMidi::Util;
 
 our $VERSION = '0.0401';
 
-use v5.36;
-use feature 'try';
-
+use v5.40;
 # use Data::Dumper::Compact qw(ddc);
 use MIDI::RtMidi::FFI::Device ();
 use Exporter 'import';
+
 our @EXPORT = qw(
     in_port
     out_port
@@ -17,9 +16,8 @@ our @EXPORT = qw(
     input_ports
     output_ports
     stop_all_notes
+    program_changer
 );
-
-no warnings 'experimental::try';
 
 =head1 SYNOPSIS
 
@@ -40,8 +38,6 @@ no warnings 'experimental::try';
 =head1 DESCRIPTION
 
 C<MIDI::RtMidi::Util> is a junk drawer for Real-time MIDI utilities.
-
-=cut
 
 =head1 FUNCTIONS
 
@@ -85,34 +81,35 @@ sub out_port ($name) {
 
 =head2 stop_device
 
-  stop_device();
+  stop_device($device);
 
 Stop an open C<MIDI::RtMidi::FFI::Device> device.
 
 =cut
 
-sub stop_device ($midi_out) {
+sub stop_device ($device) {
     try {
-        $midi_out->stop;
-        $midi_out->panic;
+        $device->stop;
+        $device->panic;
     }
     catch ($e) {
+        chomp $e;
         warn "Can't stop the MIDI device: $e\n";
     }
 }
 
 =head2 stop_all_notes
 
-  stop_all_notes();
+  stop_all_notes($device);
 
-Send a C<note_off()> message to all channels and all notes.
+Send a C<note_off()> message to all 16 channels and all 128 notes.
 
 =cut
 
-sub stop_all_notes ($midi_out) {
-    for my $chan (0, 15) {
+sub stop_all_notes ($device) {
+    for my $chan (0 .. 15) {
         for my $n (0 .. 127) {
-            $midi_out->note_off($chan, $n, 0);
+            $device->note_off($chan, $n, 0);
         }
     }
 }
@@ -147,6 +144,29 @@ sub output_ports () {
         map { $device->get_port_name($_) }
             sort { $a <=> $b } keys $device->get_all_port_nums->%*
     ];
+}
+
+=head2 program_changer
+
+  program_changer($device, $program, $channel, $msb_bank, $lsb_bank);
+
+Send a bank select (CC 0 MSB, and CC 32 LSB when given) followed by a
+program change.  All arguments but the device are optional and default
+to C<0> (the LSB is skipped if it is not defined).
+
+=cut
+
+sub program_changer ($device, $program = 0, $channel = 0, $msb_bank = 0, $lsb_bank = undef) {
+    try {
+        $device->control_change($channel, 0, $msb_bank);
+        $device->control_change($channel, 32, $lsb_bank) if defined $lsb_bank;
+        $device->program_change($channel, $program);
+    }
+    catch ($e) {
+        # BUGFIX: errors usually end in a newline already; avoid a doubled one.
+        chomp $e;
+        die "ERROR: $e\n";
+    }
 }
 
 1;
