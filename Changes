@@ -1,6 +1,7 @@
 Revision history for MIDI-RtMidi-Util
 
 {{$NEXT}}
+    - Improve documentation.
 
 0.0501 2026-10-10 09:11:56
     - Fix synopsis.
