@@ -39,7 +39,7 @@ our @EXPORT = qw(
 
 =head1 DESCRIPTION
 
-C<MIDI::RtMidi::Util> is a junk drawer for Real-time MIDI utilities.
+C<MIDI::RtMidi::Util> is a junk drawer for real-time MIDI utilities.
 
 =head1 FUNCTIONS
 
