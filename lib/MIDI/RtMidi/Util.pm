@@ -49,7 +49,7 @@ C<MIDI::RtMidi::Util> is a junk drawer for real-time MIDI utilities.
 
 Open and return a named L<MIDI::RtMidi::FFI::Device> C<RtMidiIn> device.
 
-This function takes a unique part of an open port name as its argument.
+This function takes a unique part of an open MIDI port name as its argument.
 
 =cut
 
@@ -66,7 +66,7 @@ sub in_port ($name) {
 
 Open and return a named L<MIDI::RtMidi::FFI::Device> C<RtMidiOut> device.
 
-This function takes a unique part of an open port name as its argument.
+This function takes a unique part of an open MIDI port name as its argument.
 
 =cut
 
