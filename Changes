@@ -1,6 +1,7 @@
 Revision history for MIDI-RtMidi-Util
 
 {{$NEXT}}
+    - Add the eg/program_changer.pl program.
 
 0.0503 2026-10-11 12:48:33
     - Improve the eg/start-stop.pl program.
