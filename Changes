@@ -1,6 +1,8 @@
 Revision history for MIDI-RtMidi-Util
 
 {{$NEXT}}
+
+0.0503 2026-10-11 12:48:33
     - Improve the eg/start-stop.pl program.
 
 0.0502 2026-10-11 10:08:52
