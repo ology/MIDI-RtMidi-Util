@@ -1,6 +1,8 @@
 Revision history for MIDI-RtMidi-Util
 
 {{$NEXT}}
+
+0.0502 2026-10-11 10:08:52
     - Improve documentation.
     - Fix the `program_changer()` logic.
 
