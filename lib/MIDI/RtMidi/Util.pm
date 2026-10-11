@@ -158,10 +158,12 @@ to C<0> (the LSB is skipped if it is not defined).
 
 =cut
 
-sub program_changer ($device, $program = 0, $channel = 0, $msb_bank = 0, $lsb_bank = undef) {
+sub program_changer ($device, $program=0, $channel=0, $msb_bank=undef, $lsb_bank=undef) {
     try {
-        $device->control_change($channel, 0, $msb_bank);
-        $device->control_change($channel, 32, $lsb_bank) if defined $lsb_bank;
+        if (defined $msb_bank || defined $lsb_bank) {
+            $device->control_change($channel, 0, $msb_bank // 0);
+            $device->control_change($channel, 32, $lsb_bank // 0);
+        }
         $device->program_change($channel, $program);
     }
     catch ($e) {
