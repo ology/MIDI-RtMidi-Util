@@ -152,9 +152,13 @@ sub output_ports () {
 
   program_changer($device, $program, $channel, $msb_bank, $lsb_bank);
 
-Send a bank select (CC 0 MSB, and CC 32 LSB when given) followed by a
-program change.  All arguments but the device are optional and default
-to C<0> (the LSB is skipped if it is not defined).
+Send bank select messages (CC#0 MSB and CC#32 LSB when given) followed by a
+C<program_change> message. The C<program> and C<channel> arguments default to
+C<0>. The C<msb_bank> and C<lsb_bank> arguments default to C<undef>.
+
+Note that some devices B<remember> the C<lsb_bank> and so, in order for the
+C<program_change> message to be recognized the C<lsb_bank> must be changed from
+the previous setting.
 
 =cut
 
