@@ -2,7 +2,7 @@ package MIDI::RtMidi::Util;
 
 # ABSTRACT: Handy Utilities for Real-time MIDI
 
-our $VERSION = '0.0600';
+our $VERSION = '0.0601';
 
 use v5.40;
 # use Data::Dumper::Compact qw(ddc);
