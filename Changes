@@ -1,6 +1,7 @@
 Revision history for MIDI-RtMidi-Util
 
 {{$NEXT}}
+    - Remove the `stop_all_notes()` function now that `->panic` is fixed.
 
 0.0504 2026-10-11 12:52:50
     - Add the eg/program_changer.pl program.

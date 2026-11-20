@@ -15,7 +15,6 @@ our @EXPORT = qw(
     stop_device
     input_ports
     output_ports
-    stop_all_notes
     program_changer
 );
 
@@ -34,7 +33,7 @@ our @EXPORT = qw(
 
   END {
     stop_device($midi_out);
-    stop_all_notes($midi_out);
+    $midi_out->panic; # CC#123 RtMidi method
   }
 
 =head1 DESCRIPTION
@@ -97,22 +96,6 @@ sub stop_device ($device) {
     catch ($e) {
         chomp $e;
         warn "Can't stop the MIDI device: $e\n";
-    }
-}
-
-=head2 stop_all_notes
-
-  stop_all_notes($device);
-
-Send a C<note_off()> message to all 16 channels and all 128 notes.
-
-=cut
-
-sub stop_all_notes ($device) {
-    for my $chan (0 .. 15) {
-        for my $n (0 .. 127) {
-            $device->note_off($chan, $n, 0);
-        }
     }
 }
 
