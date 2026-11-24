@@ -139,10 +139,6 @@ Send bank select messages (CC#0 MSB and CC#32 LSB when given) followed by a
 C<program_change> message. The C<program> and C<channel> arguments default to
 C<0>. The C<msb_bank> and C<lsb_bank> arguments default to C<undef>.
 
-Note that some devices B<remember> the C<lsb_bank> and so, in order for the
-C<program_change> message to be recognized the C<lsb_bank> must be changed from
-the previous setting.
-
 =cut
 
 sub program_changer ($device, $program=0, $channel=0, $msb_bank=undef, $lsb_bank=undef) {
@@ -154,7 +150,6 @@ sub program_changer ($device, $program=0, $channel=0, $msb_bank=undef, $lsb_bank
         $device->program_change($channel, $program);
     }
     catch ($e) {
-        # BUGFIX: errors usually end in a newline already; avoid a doubled one.
         chomp $e;
         die "ERROR: $e\n";
     }
