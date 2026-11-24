@@ -1,6 +1,8 @@
 Revision history for MIDI-RtMidi-Util
 
 {{$NEXT}}
+
+0.0602 2026-11-23 18:04:00
     - Fix the argument mismatch in the eg/program_changer.pl program.
     - Improve documentation.
 
